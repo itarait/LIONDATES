@@ -1,0 +1,406 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+
+        <template id="report_tax_invoice_doc">
+            <t t-call="web.external_layout">
+                <t t-set="doc" t-value="doc.with_context({'lang':doc.partner_id.lang})"/>
+                <tr t-foreach="docs" t-as="l">
+                    <div class="page">
+                        <div>
+                            <center><h3><b>TAX INVOICE</b></h3></center>
+                        </div>
+                        <table>
+                            <style>
+
+                                table, td, th {
+                                border: 1px solid black;
+                                width: 950px;
+                                }
+
+                                p, h1, h2, h3, h4, h5, h6 {
+                                font-family: "Times New Roman", Times, serif;
+                                }
+
+                            </style>
+                            <div>
+                                <tr>
+                                    <td rowspan="3" style="padding-left:3px;">
+                                        <div style="width:450px;">
+                                            <h4><b><span t-field="l.company_id.name" /></b></h4>
+                                            <p><b>Address : <span t-field="l.company_id.street" /></b></p>
+                                            <p><b>PAN NO : </b></p>
+                                            <p><b>STATE CODE : <span t-field="l.company_id.state_id.code" /></b></p>
+                                            <p><b>GSTIN/UIN : <span t-field="l.company_id.vat" /></b></p>
+                                            <p><b>CIN : </b></p>
+                                            <p><b>E-Mail : <span t-field="l.company_id.email" /></b></p>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Invoice No : </b></p>
+                                            <p><b><span t-field="l.number" /></b></p>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Dated :</b></p>
+                                            <p><b><span t-field="l.date_invoice" /></b></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Delivery Note :</b></p>
+                                            <p><b></b></p>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Mode/Terms of Payment :</b></p>
+                                            <p><b><span t-field="l.payment_term_id" /></b></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Supplier's Ref :</b></p>
+                                            <p><b></b></p>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Other Reference's :</b></p>
+                                            <p><b></b></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </div>
+
+                            <div>
+                                <tr>
+                                    <td style="padding-left:3px;" rowspan="4">
+                                        <div style="width:450px;">
+                                            <h4><b>Buyer</b></h4>
+                                            <p><b><span t-field="l.partner_id.name" /></b></p>
+                                            <p><b>Plot No : <span t-field="l.partner_id.street" /></b></p>
+                                            <p><b>Address : <span t-field="l.partner_id.street2" /></b></p>
+                                            <p><b>State Name : <span t-field="l.partner_id.state_id" /></b></p>
+                                            <p><b>GSTIN/UIN : <span t-field="l.partner_id.vat" /></b></p>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Buyer's Order No :</b></p>
+                                            <p><b></b></p>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Dated :</b></p>
+                                            <p><b></b></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Despatch Document No :</b></p>
+                                            <p><b></b></p>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Despatched Note Date :</b></p>
+                                            <p><b></b></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Despatched through :</b></p>
+                                            <p><b></b></p>
+                                        </div>
+                                    </td>
+                                    <td style="padding-left:3px;">
+                                        <div>
+                                            <p><b>Destination :</b></p>
+                                            <p><b></b></p>
+                                        </div>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-left:3px;" colspan="3">
+                                        <p><b>Terms of Delivery :</b></p>
+                                    </td>
+                                </tr>
+                            </div>
+
+                        </table>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th class="text-center" style="width:400px;"><p>Description of Goods</p></th>
+                                    <th class="text-center" style="width:50px;"><p>HSN</p></th>
+                                    <th class="text-center" style="width:50px;"><p>MRP/<br/>Marginal</p></th>
+                                    <th class="text-center" style="width:50px;"><p>Quantity</p></th>
+                                    <th class="text-center" style="width:50px;"><p>Rate</p></th>
+                                    <th class="text-center" style="width:50px;"><p>Per</p></th>
+                                    <th class="text-center" style="width:50px;"><p>Dis %</p></th>
+                                    <th class="text-center" style="width:50px;"><p>Amount</p></th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+                                <t t-set="product_category" t-value="[]"/>
+                                <t t-foreach="l.invoice_line_ids" t-as="a">
+                                    <t t-set="product_category" t-value="product_category+[a.product_id.categ_id]"/>
+                                </t>
+
+                                <t t-foreach="set(product_category)" t-as="category">
+                                    <tr>
+                                        <td style="width:800px;" colspan="8">
+                                            <p><b><span t-esc="category.name"/></b></p>
+                                        </td>
+
+                                    </tr>
+
+                                    <tr t-foreach="l.invoice_line_ids" t-as="b">
+                                        <t t-if="category.id==b.product_id.categ_id.id">
+                                            <td style="width:400px;"><p><span t-field="b.product_id"/></p></td>
+                                            <td class="text-center" style="width:50px;"><p><span t-field="b.product_id.l10n_in_hsn_code"/></p></td>
+                                            <td class="text-center" style="width:50px;"><p></p></td>
+                                            <td class="text-center" style="width:50px;"><p><b><span t-field="b.quantity"/></b></p></td>
+                                            <td class="text-center" style="width:50px;"><p><span t-field="b.price_unit"/></p></td>
+                                            <td class="text-center" style="width:50px;"><p><span t-field="b.uom_id"/></p></td>
+                                            <td class="text-center" style="width:50px;"><p><span t-field="b.discount"/></p></td>
+                                            <td class="text-center" style="width:50px;"><p class="pull-right"><b><span t-field="b.price_subtotal"/></b></p></td>
+                                         </t>
+                                    </tr>
+
+
+
+                                </t>
+
+                                <tr>
+
+                                    <td style="width:400px;"><p></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td style="width:50px;"><p class="pull-right"><b><span t-field="l.amount_untaxed"/></b></p></td>
+
+                                </tr>
+
+                                <tr t-foreach="l.tax_line_ids" t-as="w" style="border-top:hidden;">
+                                    <div>
+                                        <td style="width:400px;">
+                                            <div class="pull-right">
+                                                <p><b><span t-field="w.name"/></b></p>
+
+                                            </div>
+                                        </td>
+                                        <td style="width:50px;">
+                                            <p></p>
+                                        </td>
+                                        <td style="width:50px;">
+                                            <p></p>
+                                        </td>
+                                        <td style="width:50px;">
+                                            <p></p>
+                                        </td>
+                                        <td style="width:50px;">
+                                            <div class="pull-right">
+
+                                            </div>
+                                        </td>
+                                        <td style="width:50px;">
+                                            <p></p>
+                                        </td>
+                                        <td style="width:50px;">
+                                            <p></p>
+                                        </td>
+                                        <td style="width:50px;">
+                                            <div class="pull-right">
+                                                <p><b><span t-field="w.amount_total"/></b></p>
+                                            </div>
+                                        </td>
+                                    </div>
+                                </tr>
+
+                                <tr>
+
+                                    <t t-set="a" t-value="0" />
+                                    <t t-foreach="l.invoice_line_ids" t-as="o">
+                                        <t t-set="a" t-value="a+o.quantity"/>
+                                    </t>
+
+
+                                    <td style="width:400px;"><p><b>Total</b></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td class="text-center" style="width:50px;"><p><b><span t-esc="a" />BOX</b></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td style="width:50px;"><p></p></td>
+                                    <td style="width:50px;"><p class="pull-right"><b><span t-field="l.amount_total" /></b></p></td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="8">
+                                        <h6 class="text-left"><b>Amount Chargeable (in words)</b></h6>
+                                        <p><b></b></p>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+
+
+
+                        <table>
+
+                            <thead>
+
+                                <style>
+                                    .heading_line {
+                                        border-right : 1px solid black;
+                                        height : 53px;
+                                        margin-right : -1px;
+                                    }
+                                </style>
+
+                                <tr style="border-top:hidden;">
+                                    <th rowspan="2">
+                                        <div class="heading_line">
+                                            <div style="width:500px">
+                                                <p class="text-center">HSN/SAC</p>
+                                            </div>
+                                        </div>
+                                    </th>
+
+                                    <th rowspan="2">
+                                        <p class="text-center">Taxable <br/> Value</p>
+                                    </th>
+
+                                    <th colspan="2">
+                                        <p class="text-center">Integrated Tax</p>
+                                    </th>
+
+                                    <th rowspan="2">
+                                        <p class="text-center">Total <br/> Tax Amount</p>
+                                    </th>
+                                </tr>
+
+                                <tr>
+                                    <th>
+                                        <p class="text-center">Rate</p>
+                                    </th>
+                                    <th>
+                                        <p class="text-center">Amount</p>
+                                    </th>
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td style="width:500px;">
+                                        <p><span t-field="l.sequence_number_next" /></p>
+                                    </td>
+
+                                    <td>
+                                        <p><span t-field="l.amount_untaxed" /></p>
+                                    </td>
+
+                                    <td>
+                                        <p></p>
+                                    </td>
+
+                                    <td>
+                                        <p></p>
+                                    </td>
+
+                                    <td>
+                                        <p></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+
+                                    <td>
+                                        <p class="text-right"><b>Total</b></p>
+                                    </td>
+
+                                    <td>
+                                        <p><span t-field="l.amount_untaxed" /></p>
+                                    </td>
+
+                                    <td>
+                                        <p></p>
+                                    </td>
+
+                                    <td>
+                                        <p><span t-field="l.amount_total" /></p>
+                                    </td>
+
+                                    <td>
+                                        <p><span t-field="l.amount_total" /></p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td colspan="5">
+                                        <p><b>Tax Amount (in words) : </b></p>
+                                        <br/><br/><br/>
+
+                                        <p>Remarks :</p>
+                                        <p>Hyderabad</p>
+                                        <p>Company's PAN :</p>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <div style="padding:5px">
+                                            <p><u><b>Declaration</b></u></p>
+                                            <p><b>
+                                                I / We hereby certify that food and foods mentioned in this invoice
+                                                is / are warranted to be of the nature and quality which <br/> it / these purpose to be..
+                                            </b></p>
+                                        </div>
+                                    </td>
+                                    <td colspan="5">
+                                        <div style="padding:5px">
+                                            <p class="text-right">for <b>LION DATES IMPEX PRIVATE LIMITED</b></p>
+                                            <br/><br/>
+                                            <p class="text-right"><b>Authorised Signatory</b></p>
+                                        </div>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+                </tr>
+            </t>
+
+        </template>
+
+        <template id="report_tax_invoice">
+            <t t-call="web.html_container">
+                <t t-foreach="docs" t-as="doc">
+                    <t t-call="itara_lion_tax_invoice.report_tax_invoice_doc" t-lang="doc.partner_id.lang"/>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>
